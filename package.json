@@ -1,8 +1,8 @@
 {
-  "name": "visitors-counter-backend",
+  "name": "visitors-counter",
   "version": "1.0.0",
-  "description": "All in one visitors counter.",
-  "main": "index.js",
+  "description": "Github profile visitors counter.",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
