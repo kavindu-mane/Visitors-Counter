@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Github = require("../models/Github");
+const axios = require("axios");
 
 router.route("/").get(async (req, res) => {
   const quaries = req.query;
@@ -17,26 +18,30 @@ router.route("/").get(async (req, res) => {
     newUser
       .save()
       .then(() => {
-        res.send(
-          `<img src = "https://img.shields.io/badge/Profile%20views-1-${color}?style=${style}" alt = "Profile views" />`
-        );
+        const url = `https://img.shields.io/badge/Profile%20views-1-${color}?style=${style}`;
+        sendingSvg(url, res);
       })
       .catch(() => {
-        res.send(
-          `<img src = "https://img.shields.io/badge/Profile%20views-Error-${color}?style=${style}" alt = "Profile views" />`
-        );
+        const url = `https://img.shields.io/badge/Profile%20views-Error-${color}?style=${style}`;
+        sendingSvg(url, res);
       });
   } else {
-    res.send(
-      `<img src = "https://img.shields.io/badge/Profile%20views-${
-        user["views"] + 1
-      }-${color}?style=${style}" alt = "Profile views" />`
-    );
+    const url = `https://img.shields.io/badge/Profile%20views-${user[
+      "views"
+    ] + 1}-${color}?style=${style}`;
+    sendingSvg(url, res);
+
     await Github.findOneAndUpdate(
       { userName: username },
       { views: ++user["views"] }
     );
   }
 });
+
+async function sendingSvg(url, res) {
+  let response = await axios.get(url);
+  const svgXml = response.data;
+  res.send(svgXml);
+}
 
 module.exports = router;
