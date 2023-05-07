@@ -1,6 +1,6 @@
 {
-  "name": "visitors-counter",
-  "version": "1.0.0",
+  "name": "github-visitors-counter",
+  "version": "1.0.1",
   "description": "Github profile visitors counter.",
   "main": "server.js",
   "scripts": {
@@ -14,8 +14,7 @@
   },
   "keywords": [
     "visitors-counter",
-    "github-visitors-counter",
-    "website-visitors-counter"
+    "github-visitors-counter"
   ],
   "author": "Kavindu Manahara",
   "license": "MIT",

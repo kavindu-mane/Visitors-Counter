@@ -24,3 +24,16 @@ app.listen(PORT, () => {
 });
 
 app.use("/github", githubRouter);
+// give message about backend working status
+app.get("/" , (req ,res) => {
+   res.send(
+     `<img src = "https://img.shields.io/badge/System%20status-Working-success?style=for-the-badge" alt = "Profile views" />`
+   );
+})
+// give error search term not found
+app.get("/:anything", (req, res) => {
+  const search = req.params.anything;
+  res.send(
+    `<img src = "https://img.shields.io/badge/Error-${search}%20not%20fount-red?style=for-the-badge" alt = "Profile views" />`
+  );
+});
