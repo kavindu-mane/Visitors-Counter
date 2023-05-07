@@ -42,5 +42,6 @@ app.get("/:anything", async (req, res) => {
 async function sendingSvg(url, res) {
   let response = await axios.get(url);
   const svgXml = response.data;
+  res.set("Content-Type", "text/xml");
   res.send(svgXml);
 }
