@@ -26,9 +26,9 @@ router.route("/").get(async (req, res) => {
         sendingSvg(url, res);
       });
   } else {
-    const url = `https://img.shields.io/badge/Profile%20views-${user[
-      "views"
-    ] + 1}-${color}?style=${style}`;
+    const url = `https://img.shields.io/badge/Profile%20views-${
+      user["views"] + 1
+    }-${color}?style=${style}`;
     sendingSvg(url, res);
 
     await Github.findOneAndUpdate(
@@ -41,7 +41,7 @@ router.route("/").get(async (req, res) => {
 async function sendingSvg(url, res) {
   let response = await axios.get(url);
   const svgXml = response.data;
-  res.set("Content-Type", "text/xml");
+  res.set("Content-Type", "img/svg+xml");
   res.send(svgXml);
 }
 
