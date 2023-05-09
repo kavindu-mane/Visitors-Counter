@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let Github = require("../models/Github");
 const axios = require("axios");
+const { Readable } = require("stream");
 
 router.route("/").get(async (req, res) => {
   const quaries = req.query;
@@ -39,7 +40,15 @@ router.route("/").get(async (req, res) => {
 });
 
 async function sendingSvg(url, res) {
-  res.redirect(url);
+  try {
+    const svgResponse = await axios.get(url, { responseType: "stream" });
+    res.set("Content-Type", "image/svg+xml");
+    const svgStream = Readable.from(svgResponse.data);
+    svgStream.pipe(res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving SVG");
+  }
 }
 
 module.exports = router;

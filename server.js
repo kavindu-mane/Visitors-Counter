@@ -5,7 +5,7 @@ const cors = require("cors");
 const githubRouter = require("./routes/Github");
 const app = express();
 const axios = require("axios");
-const fs = require("fs");
+const { Readable } = require("stream");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
@@ -41,8 +41,13 @@ app.get("/:anything", async (req, res) => {
 });
 
 async function sendingSvg(url, res) {
-  let response = await axios.get(url);
-  const svgXml = response.data;
-  res.set("Content-Type", "text/xml");
-  res.send(svgXml);
+  try {
+    const svgResponse = await axios.get(url, { responseType: "stream" });
+    res.set("Content-Type", "image/svg+xml");
+    const svgStream = Readable.from(svgResponse.data);
+    svgStream.pipe(res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving SVG");
+  }
 }
