@@ -1,6 +1,6 @@
 #  <p align = "center">Visitors-Counter</p>
 
-📌 GitHub profile vistors counter for counting your GitHub account viewers. No need coading or complex things and create your link with just adding your GitHub username.
+📌 GitHub profile visitors counter for counting your GitHub account viewers. No need coding or complex things and create your link with just adding your GitHub username.
 <div align = "center">
   <img src = "https://img.shields.io/npm/v/npm?logo=npm&style=normal" alt = "Visitors-Counter"/>
   <img src="https://img.shields.io/github/v/release/kavindu-mane/Visitors-Counter" alt="Visitors-Counter">
