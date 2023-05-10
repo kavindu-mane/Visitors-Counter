@@ -44,7 +44,7 @@ async function sendingSvg(url, res) {
   try {
     const svgResponse = await axios.get(url, { responseType: "stream" });
     res.set("Content-Type", "image/svg+xml");
-    res.set("Cache-Control", "no-cache, private");
+    res.set("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate");
     const svgStream = Readable.from(svgResponse.data);
     svgStream.pipe(res);
   } catch (error) {
